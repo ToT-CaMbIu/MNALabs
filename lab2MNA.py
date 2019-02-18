@@ -30,7 +30,7 @@ def zeidel(A, B, N):
         for i in range(n):
             s1 = sum(float(A[i][j]) * x1[j] for j in range(i))
             s2 = sum(float(A[i][j]) * x[j] for j in range(i + 1, n))
-            x_new[i] = (B[i] - s1 - s2) / float(A[i][i])
+            x1[i] = (B[i] - s1 - s2) / float(A[i][i])
         x = x1
     return x
 
