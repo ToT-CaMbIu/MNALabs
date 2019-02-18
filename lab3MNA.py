@@ -29,7 +29,6 @@ def solve(S, B, n):
     Y[0] = B[0]/S[0][0]
     for i in range(1,n):
         Y[i] = (B[i] - sum([S[k][i] * Y[k] for k in range(0, i)]))/S[i][i]
-
     return Y
 
 
