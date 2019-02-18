@@ -6,14 +6,11 @@ import math as mth
 
 
 def s(A,n):
-    S = A.copy()
-    S.fill(0.0)
+    S = np.zeros((n, n))
     S[0][0] = mth.sqrt(A[0][0])
 
     for i in range(0,n):
         for j in range(i,n):
-            if i == 0 and j == 0:
-                continue
             if i == 0:
                 S[i][j] = A[0][j] / S[0][0]
                 continue
@@ -29,6 +26,7 @@ def solve(S, B, n):
     Y[0] = B[0]/S[0][0]
     for i in range(1,n):
         Y[i] = (B[i] - sum([S[k][i] * Y[k] for k in range(0, i)]))/S[i][i]
+
     return Y
 
 
@@ -67,11 +65,11 @@ def main():
 
     U = s(A,num[0])
     print(U)
-    print(mydet(U,num[0]))
+    print(f"determinant - {mydet(U,num[0])}")
     Y = solve(U,B,num[0])
     X = np.linalg.solve(U, Y)
-    print(X)
-    print(myinv(U,num[0]))
+    print(f"solve - {X}")
+    print(f"inv - \n {myinv(U,num[0])}")
 
 
 if __name__ == '__main__':
