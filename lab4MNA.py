@@ -19,7 +19,7 @@ def rotate(A ,B ,n):
             tempB[j] = -curS * B[i] + curC * B[j]
             C = temp.copy()
             B = tempB.copy()
-    S = A*C.T*C
+    S = C.T @ A @ C
     print([S[i][i] for i in range(0,n)])
     print(C)
     print(solve(C, B, n))
