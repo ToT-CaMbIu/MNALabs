@@ -19,6 +19,9 @@ def rotate(A ,B ,n):
             tempB[j] = -curS * B[i] + curC * B[j]
             C = temp.copy()
             B = tempB.copy()
+    S = A*C.T*C
+    print([S[i][i] for i in range(0,n)])
+    print(C)
     print(solve(C, B, n))
 
 
@@ -28,6 +31,7 @@ def solve(A,B, n):
         r = B[n - i - 1] - sum(A[n - i - 1][k] * X[k] for k in range(n - i - 1,n))
         X[n - i - 1] = r / A[n - i - 1][n - i - 1]
     return X
+
 
 def main():
     num = list(map(int, input().split()))
@@ -60,3 +64,4 @@ if __name__ == "__main__":
 0.529
 0.869
 """
+#-0.00068779  0.07125395  0.14303305  0.26042207
