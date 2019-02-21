@@ -21,13 +21,18 @@ def s(A,n):
     return S
 
 
-def solve(S, B, n):
-    Y =[0]*n
-    Y[0] = B[0]/S[0][0]
-    for i in range(1,n):
-        Y[i] = (B[i] - sum([S[k][i] * Y[k] for k in range(0, i)]))/S[i][i]
+def zeidel(A, B, N):
+    n = len(A)
+    x = [1.0]*n
 
-    return Y
+    for temp in range(N):
+        x_new = np.copy(x)
+        for i in range(n):
+            s1 = sum(float(A[i][j]) * x_new[j] for j in range(i))
+            s2 = sum(float(A[i][j]) * x[j] for j in range(i + 1, n))
+            x_new[i] = (B[i] - s1 - s2) / float(A[i][i])
+        x = x_new
+    return x
 
 
 def mydet(A, n):
@@ -42,8 +47,8 @@ def myinv(A, n):
     cur = [0]*n
     for i in range(n):
         cur[i] = 1
-        Y = solve(A, cur, n)
-        ans.append(np.linalg.solve(A,Y))
+        Y = zeidel(A.T, cur, n)
+        ans.append(zeidel(A, Y ,n))
         cur[i] = 0
     return np.array(ans)
 
@@ -66,15 +71,16 @@ def main():
     U = s(A,num[0])
     print(U)
     print(f"determinant - {mydet(U,num[0])}")
-    Y = solve(U,B,num[0])
-    X = np.linalg.solve(U, Y)
+    Y = zeidel(U.T,B,num[0])
+    X = zeidel(U, Y,num[0])
     print(f"solve - {X}")
     print(f"inv - \n {myinv(U,num[0])}")
+
+    print(U @ U.T)
 
 
 if __name__ == '__main__':
     main()
-
 """
 4 4
 3.389 0.273 0.126 0.418

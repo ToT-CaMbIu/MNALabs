@@ -5,6 +5,22 @@ import numpy as np
 import math as mth
 
 
+def s(A,n):
+    S = np.zeros((n, n))
+    S[0][0] = mth.sqrt(A[0][0])
+
+    for i in range(0,n):
+        for j in range(i,n):
+            if i == 0:
+                S[i][j] = A[0][j] / S[0][0]
+                continue
+            if j == i:
+                S[i][j] = mth.sqrt(A[i][j] - sum([S[k][i] * S[k][i] for k in range(0, i)]))
+            else:
+                S[i][j] = (A[i][j] - sum([S[k][i] * S[k][j] for k in range(0, i)]))/S[i][i]
+    return S
+
+
 def rotate(A , n , total : int):
     Ufinal = np.eye(n)
     for _ in range(total):
@@ -35,11 +51,15 @@ def main():
 
     A = np.array(a)
 
-    rotate(A,num[0],25)
+    U = s(A,num[0]) @ s(A,num[0]).T
 
+    print(U)
+
+    rotate(U,num[0],25)
 
 if __name__ == "__main__":
     main()
+
 """
 4 4
 3.389 0.273 0.126 0.418
