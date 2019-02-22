@@ -8,8 +8,6 @@ def jacobi(A, B, x):
     eps = 0.01
     D = np.diag(A)
     R = A - np.diagflat(D)
-    if np.linalg.norm(R) >= 1:
-        return None
     cnt = 1
     pre = x.copy()
     x = (B - np.dot(R, x)) / D
