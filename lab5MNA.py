@@ -86,8 +86,6 @@ def main():
     print(iterations())
     print(newton_s(0))
     print(newton_s(1, n=0.9))
-    plt.figure(1)
-    plt.subplot(111)
     plt.plot(x, 4 * (1 + np.sqrt(x)) * np.log(x) - 1)
     plt.show()
 
