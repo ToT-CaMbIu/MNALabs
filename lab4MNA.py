@@ -4,7 +4,6 @@
 import numpy as np
 import math as mth
 
-
 def s(A,n):
     S = np.zeros((n, n))
     S[0][0] = mth.sqrt(A[0][0])
@@ -51,11 +50,14 @@ def main():
 
     A = np.array(a)
 
+    A = A @ A.T
+
     U = s(A,num[0]) @ s(A,num[0]).T
 
     print(U)
 
     rotate(U,num[0],25)
+    #print(np.linalg.eig(U))
 
 if __name__ == "__main__":
     main()
