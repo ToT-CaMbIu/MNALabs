@@ -40,7 +40,6 @@ def rotate(A, n):
     while max >= 10 ** (-9):
         i, j, curMax = findmax(A, n)
         max = curMax
-        print(f"{i} - {j}")
         U = np.eye(n)
         if A[i][i] == A[j][j]:
             cur = mth.pi / 4
